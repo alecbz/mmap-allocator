@@ -32,13 +32,13 @@ For convenience, some STL containers have been typdefed:
 
 ### Setting a default file
 
-You can set a default storage location for **all** allocators via the `mm::SetDefault` method.
+You can set a default storage location for **all** `mm::Allocator`s via the `mm::SetDefault` method.
 
     mm::SetDefault("test.storage");
 
-Now all `mm::Allocator`s construct via the default constructor will use the `"test.storage"` file. (Using `Allocator::New` will stil utilize whatever storage you specify).
+Now all `mm::Allocator`s constructed via the default constructor will use the `"test.storage"` file. (Using `Allocator::New` will stil utilize whatever storage you specify).
 
-This is convenient because most standard containers attempt to construct default allocators when not passed on explicitly. Thus, instead of 
+This is convenient because most standard containers attempt to construct default allocators when not passed one explicitly. Thus, instead of 
 
     
     unique_ptr<mm::Allocator<int>> alloc = mm::Allocator<int>::New("test.storage");
@@ -48,3 +48,16 @@ We can do:
 
     mm::SetDefault("test.storage");
     mm::vector<int> vec;
+
+`mm::SetDefault` does `new` an object, which can be freed via `mm::FreeDefault()`.
+
+
+## Testing
+
+`tests/mmap_allocator_test.cc` is a [gtest](https://code.google.com/p/googletest/) unit test. With gtest installed, do:
+
+    cd tests
+    make
+    ./mmap_allocator_test
+
+to run the test.
