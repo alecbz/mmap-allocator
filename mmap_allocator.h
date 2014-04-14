@@ -147,6 +147,9 @@ using vector = std::vector<T, Allocator<T>>;
 template <class Key, class T, class Compare = std::less<Key>>
 using map = std::map<Key, T, Compare, Allocator<std::pair<const Key, T>>>;
 
+template<class T, class Compare = std::less<T>>
+using set = std::set<T, Compare, Allocator<T>>;
+
 template <class Key, class T, class Hash = std::hash<Key>,
           class KeyEqual = std::equal_to<Key>>
 using unordered_map = std::unordered_map<Key, T, Hash, KeyEqual,

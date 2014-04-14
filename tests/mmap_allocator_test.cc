@@ -77,6 +77,18 @@ TEST_F(AllocatorTest, MapStringString) {
   EXPECT_EQ("World", m["Hello"]);
 }
 
+TEST_F(AllocatorTest, SetString) {
+  set<string> s;
+  
+  s.insert("foo");
+  s.insert("bar");
+
+  EXPECT_EQ(2, s.size());
+  EXPECT_EQ(1, s.count("foo"));
+  EXPECT_EQ(1, s.count("bar"));
+  EXPECT_EQ(0, s.count("baz"));
+}
+
 TEST_F(AllocatorTest, HashStringString) {
   unordered_map<string, string> m;
 
